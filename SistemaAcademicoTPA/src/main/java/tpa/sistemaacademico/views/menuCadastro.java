@@ -222,7 +222,12 @@ public class menuCadastro extends javax.swing.JFrame {
         this.setVisible(false);
 
     }//GEN-LAST:event_postAlunoButtonMouseClicked
-
+    
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        cadastroDisciplina = new CadastroDisciplina();
+        cadastroDisciplina.setVisible(true);
+        this.setVisible(false);
+    } 
     /**
      * @param args the command line arguments
      */
