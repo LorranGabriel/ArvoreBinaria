@@ -4,6 +4,7 @@
  */
 package tpa.sistemaacademico.views;
 import javax.swing.*;
+import tpa.sistemaacademico.lib.ArvoreBinaria;
 /**
  *
  * @author ferna
@@ -13,9 +14,17 @@ public class CadastroDisciplina extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public CadastroDisciplina() {
+    ArvoreBinaria arvoreBinaria;
+    public CadastroAluno cadastroAluno;
+    public CadastroDisciplina cadastroDisciplina;
+    public ConsultaAluno consultaAluno;
+    public ConsultaDisciplina consultaDisciplina;
+
+    public CadastroDisciplina(ArvoreBinaria arvore) {
         initComponents();
         this.setLocationRelativeTo(null);
+        arvoreBinaria = arvore;
+
     }
 
     /**
@@ -28,13 +37,13 @@ public class CadastroDisciplina extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        postDisciButton = new javax.swing.JButton();
+        getAlunoButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        postAlunoButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        getDisciButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
@@ -48,28 +57,38 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setAlignmentY(0.0F);
         jPanel1.setPreferredSize(new java.awt.Dimension(270, 800));
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Cadastrar Disciplina");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        postDisciButton.setBackground(new java.awt.Color(0, 0, 0));
+        postDisciButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        postDisciButton.setForeground(new java.awt.Color(255, 255, 255));
+        postDisciButton.setText("Cadastrar Disciplina");
+        postDisciButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                postDisciButtonMouseClicked(evt);
+            }
+        });
+        postDisciButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                postDisciButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Consultar Aluno");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        getAlunoButton.setBackground(new java.awt.Color(0, 0, 0));
+        getAlunoButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        getAlunoButton.setForeground(new java.awt.Color(255, 255, 255));
+        getAlunoButton.setText("Consultar Aluno");
+        getAlunoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                getAlunoButtonMouseClicked(evt);
+            }
+        });
+        getAlunoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                getAlunoButtonActionPerformed(evt);
             }
         });
 
@@ -79,13 +98,18 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         jLabel2.setText("Sistema Acadêmico");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jButton4.setBackground(new java.awt.Color(0, 0, 0));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Cadastrar Aluno");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        postAlunoButton.setBackground(new java.awt.Color(0, 0, 0));
+        postAlunoButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        postAlunoButton.setForeground(new java.awt.Color(255, 255, 255));
+        postAlunoButton.setText("Cadastrar Aluno");
+        postAlunoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                postAlunoButtonMouseClicked(evt);
+            }
+        });
+        postAlunoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                postAlunoButtonActionPerformed(evt);
             }
         });
 
@@ -93,7 +117,6 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton1.setIcon(UIManager.getIcon("FileChooser.homeFolderIcon"));
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,13 +124,18 @@ public class CadastroDisciplina extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(0, 0, 0));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Consultar Disciplina");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        getDisciButton.setBackground(new java.awt.Color(0, 0, 0));
+        getDisciButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        getDisciButton.setForeground(new java.awt.Color(255, 255, 255));
+        getDisciButton.setText("Consultar Disciplina");
+        getDisciButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                getDisciButtonMouseClicked(evt);
+            }
+        });
+        getDisciButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                getDisciButtonActionPerformed(evt);
             }
         });
 
@@ -119,14 +147,14 @@ public class CadastroDisciplina extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(postDisciButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getAlunoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(postAlunoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 269, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(getDisciButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -139,18 +167,18 @@ public class CadastroDisciplina extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(postAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(postDisciButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(getAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(getDisciButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jPanel2.setAlignmentX(1.0F);
         jPanel2.setAlignmentY(1.0F);
         jPanel2.setMaximumSize(new java.awt.Dimension(1010, 800));
@@ -172,7 +200,6 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Cadastro de Disciplina");
-        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -256,17 +283,17 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
       
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void postDisciButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postDisciButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_postDisciButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void getAlunoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAlunoButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_getAlunoButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void postAlunoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postAlunoButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_postAlunoButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add   your handling code here:
@@ -276,57 +303,41 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void getDisciButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getDisciButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_getDisciButtonActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void postAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postAlunoButtonMouseClicked
+        cadastroAluno = new CadastroAluno(arvoreBinaria);
+        cadastroAluno.setVisible(true);
+        this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_postAlunoButtonMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastroDisciplina().setVisible(true);
-            }
-        });
-    }
+    private void postDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postDisciButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_postDisciButtonMouseClicked
+
+    private void getAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getAlunoButtonMouseClicked
+        consultaAluno = new ConsultaAluno(arvoreBinaria);
+        consultaAluno.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_getAlunoButtonMouseClicked
+
+    private void getDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getDisciButtonMouseClicked
+        consultaDisciplina = new ConsultaDisciplina(arvoreBinaria);
+        consultaDisciplina.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_getDisciButtonMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton getAlunoButton;
+    private javax.swing.JButton getDisciButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -338,5 +349,7 @@ public class CadastroDisciplina extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton postAlunoButton;
+    private javax.swing.JButton postDisciButton;
     // End of variables declaration//GEN-END:variables
 }

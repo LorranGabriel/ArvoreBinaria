@@ -16,11 +16,16 @@ public class CadastroAluno extends javax.swing.JFrame {
     /**
      * Creates new form CadastroAluno
      */
+    public CadastroAluno cadastroAluno;
+    public CadastroDisciplina cadastroDisciplina;
+    public ConsultaAluno consultaAluno;
+    public ConsultaDisciplina consultaDisciplina;
+
     ArvoreBinaria arvoreBinaria;
     public CadastroAluno(ArvoreBinaria arvore) {
         initComponents();
         arvoreBinaria = arvore;
-//        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         
     }
 
@@ -34,13 +39,13 @@ public class CadastroAluno extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        postDisciButton = new javax.swing.JButton();
+        getAlunoButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        postAlunoButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        getDisciButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         postAluno = new javax.swing.JButton();
@@ -54,28 +59,38 @@ public class CadastroAluno extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setAlignmentY(0.0F);
         jPanel1.setPreferredSize(new java.awt.Dimension(270, 800));
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Cadastrar Disciplina");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        postDisciButton.setBackground(new java.awt.Color(0, 0, 0));
+        postDisciButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        postDisciButton.setForeground(new java.awt.Color(255, 255, 255));
+        postDisciButton.setText("Cadastrar Disciplina");
+        postDisciButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                postDisciButtonMouseClicked(evt);
+            }
+        });
+        postDisciButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                postDisciButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Consultar Aluno");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        getAlunoButton.setBackground(new java.awt.Color(0, 0, 0));
+        getAlunoButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        getAlunoButton.setForeground(new java.awt.Color(255, 255, 255));
+        getAlunoButton.setText("Consultar Aluno");
+        getAlunoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                getAlunoButtonMouseClicked(evt);
+            }
+        });
+        getAlunoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                getAlunoButtonActionPerformed(evt);
             }
         });
 
@@ -85,13 +100,13 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel2.setText("Sistema Acadêmico");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jButton4.setBackground(new java.awt.Color(0, 0, 0));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Cadastrar Aluno");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        postAlunoButton.setBackground(new java.awt.Color(0, 0, 0));
+        postAlunoButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        postAlunoButton.setForeground(new java.awt.Color(255, 255, 255));
+        postAlunoButton.setText("Cadastrar Aluno");
+        postAlunoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                postAlunoButtonActionPerformed(evt);
             }
         });
 
@@ -99,7 +114,6 @@ public class CadastroAluno extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton1.setIcon(UIManager.getIcon("FileChooser.homeFolderIcon"));
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,13 +121,18 @@ public class CadastroAluno extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(0, 0, 0));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Consultar Disciplina");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        getDisciButton.setBackground(new java.awt.Color(0, 0, 0));
+        getDisciButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        getDisciButton.setForeground(new java.awt.Color(255, 255, 255));
+        getDisciButton.setText("Consultar Disciplina");
+        getDisciButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                getDisciButtonMouseClicked(evt);
+            }
+        });
+        getDisciButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                getDisciButtonActionPerformed(evt);
             }
         });
 
@@ -125,11 +144,11 @@ public class CadastroAluno extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(postDisciButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getAlunoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(postAlunoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getDisciButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
@@ -145,18 +164,18 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(postAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(postDisciButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(getAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(getDisciButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jPanel2.setAlignmentX(1.0F);
         jPanel2.setAlignmentY(1.0F);
         jPanel2.setMaximumSize(new java.awt.Dimension(1010, 800));
@@ -174,11 +193,15 @@ public class CadastroAluno extends javax.swing.JFrame {
                 postAlunoMouseClicked(evt);
             }
         });
+        postAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postAlunoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Cadastro de Aluno");
-        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         nameAlunoField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -193,21 +216,24 @@ public class CadastroAluno extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(129, 129, 129)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addComponent(nameAlunoField, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(355, 355, 355)
+                        .addComponent(postAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(postAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(nameAlunoField, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(129, 129, 129)))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(matAlunoField, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(301, 301, 301)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(matAlunoField, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(301, 301, 301)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -223,7 +249,7 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(matAlunoField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(42, 42, 42)
                 .addComponent(postAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -249,25 +275,25 @@ public class CadastroAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void postDisciButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postDisciButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_postDisciButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void getAlunoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAlunoButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_getAlunoButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void postAlunoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postAlunoButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_postAlunoButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add   your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void getDisciButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getDisciButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_getDisciButtonActionPerformed
 
     private void postAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postAlunoMouseClicked
         Aluno aluno = new Aluno( Integer.parseInt(matAlunoField.getText()), nameAlunoField.getText());
@@ -275,16 +301,38 @@ public class CadastroAluno extends javax.swing.JFrame {
         System.out.println("Quantidade de Nós: " + arvoreBinaria.quantidadeNos() + " Altura: " + arvoreBinaria.altura());
     }//GEN-LAST:event_postAlunoMouseClicked
 
+    private void getAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getAlunoButtonMouseClicked
+        consultaAluno = new ConsultaAluno(arvoreBinaria);
+        consultaAluno.setVisible(true);
+        this.setVisible(false); 
+    }//GEN-LAST:event_getAlunoButtonMouseClicked
+
+    private void postAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postAlunoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_postAlunoActionPerformed
+
+    private void postDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postDisciButtonMouseClicked
+        cadastroDisciplina = new CadastroDisciplina(arvoreBinaria);
+        cadastroDisciplina.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_postDisciButtonMouseClicked
+
+    private void getDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getDisciButtonMouseClicked
+        consultaDisciplina = new ConsultaDisciplina(arvoreBinaria);
+        consultaDisciplina.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_getDisciButtonMouseClicked
+                             
+                                   
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton getAlunoButton;
+    private javax.swing.JButton getDisciButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -295,5 +343,7 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JTextField matAlunoField;
     private javax.swing.JTextField nameAlunoField;
     private javax.swing.JButton postAluno;
+    private javax.swing.JButton postAlunoButton;
+    private javax.swing.JButton postDisciButton;
     // End of variables declaration//GEN-END:variables
 }
