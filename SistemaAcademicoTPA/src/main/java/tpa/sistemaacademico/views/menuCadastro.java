@@ -41,6 +41,9 @@ public class menuCadastro extends javax.swing.JFrame {
         // Instancio uma árvore binária. Lembre de ajustar o import para sua classe de
         // árvore binária
         arvoreBinaria = new ArvoreBinaria(compPorMatricula);
+        Aluno aluno = new Aluno(123, "lorran");
+        arvoreBinaria.adicionar(aluno);
+
         // Chamo o gerador para inserir 100 elementos nessa árvore de forma que fique
         // degenerada
 //        gerador.geraArvoreDegenerada(100, arv);
