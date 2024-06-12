@@ -76,6 +76,7 @@ public class ConsultaAluno extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         getAlunoButton = new javax.swing.JButton();
+        postAlunoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -153,6 +154,7 @@ public class ConsultaAluno extends javax.swing.JFrame {
 
         searchField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         searchField.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        searchField.setToolTipText("Insira os dados da busca");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -205,7 +207,6 @@ public class ConsultaAluno extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                         .addGap(1, 1, 1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(errorLabel)
@@ -403,6 +404,21 @@ public class ConsultaAluno extends javax.swing.JFrame {
             }
         });
 
+        postAlunoButton.setBackground(new java.awt.Color(0, 0, 0));
+        postAlunoButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        postAlunoButton.setForeground(new java.awt.Color(255, 255, 255));
+        postAlunoButton.setText("Cadastrar Aluno");
+        postAlunoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                postAlunoButtonMouseClicked(evt);
+            }
+        });
+        postAlunoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postAlunoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -417,7 +433,8 @@ public class ConsultaAluno extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(getAlunoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(getAlunoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(postAlunoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -429,7 +446,9 @@ public class ConsultaAluno extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(postAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(postDisciButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(getAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -495,7 +514,6 @@ public class ConsultaAluno extends javax.swing.JFrame {
 
     private void nameSerachItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_nameSerachItemStateChanged
             is_name= !is_name;
-            System.out.println("Alterou Estado");
     }//GEN-LAST:event_nameSerachItemStateChanged
 
     private void searchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseClicked
@@ -553,6 +571,10 @@ public class ConsultaAluno extends javax.swing.JFrame {
     private void matFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_matFieldActionPerformed
+
+    private void postAlunoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postAlunoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_postAlunoButtonActionPerformed
                                      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel errorLabel;
@@ -584,6 +606,7 @@ public class ConsultaAluno extends javax.swing.JFrame {
     private javax.swing.JTextField matField;
     private javax.swing.JTextField nameField;
     private javax.swing.JCheckBox nameSerach;
+    private javax.swing.JButton postAlunoButton;
     private javax.swing.JButton postDisciButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextPane searchField;

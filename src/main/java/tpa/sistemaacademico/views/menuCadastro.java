@@ -7,6 +7,8 @@ import javax.swing.*;
 import tpa.sistemaacademico.app.Aluno;
 import tpa.sistemaacademico.app.ComparadorAlunoPorMatricula;
 import tpa.sistemaacademico.app.ComparadorAlunoPorNome;
+import tpa.sistemaacademico.app.ComparadorDisciplinaPorCodigo;
+import tpa.sistemaacademico.app.Disciplina;
 import tpa.sistemaacademico.app.GeradorDeArvores;
 import tpa.sistemaacademico.lib.ArvoreBinaria;
 import tpa.sistemaacademico.lib.IArvoreBinaria;
@@ -16,7 +18,8 @@ import tpa.sistemaacademico.lib.IArvoreBinaria;
  */
 
 public class menuCadastro extends javax.swing.JFrame {
-    public ArvoreBinaria arvoreBinaria;
+    public ArvoreBinaria arvoreBinariaAluno;
+    public ArvoreBinaria arvoreBinariaDiciplina;
 
     public CadastroAluno cadastroAluno;
     public CadastroDisciplina cadastroDisciplina;
@@ -33,6 +36,8 @@ public class menuCadastro extends javax.swing.JFrame {
         GeradorDeArvores gerador = new GeradorDeArvores();
         // Instancio um comparador de alunos por matricula (também fornecido)
         ComparadorAlunoPorMatricula compPorMatricula = new ComparadorAlunoPorMatricula();
+        ComparadorDisciplinaPorCodigo compPorCodigo = new ComparadorDisciplinaPorCodigo();
+
         ComparadorAlunoPorNome compPorNome = new ComparadorAlunoPorNome();
         IArvoreBinaria<Aluno> arv;
 
@@ -40,24 +45,29 @@ public class menuCadastro extends javax.swing.JFrame {
         // relatório-------------------------------
         // Instancio uma árvore binária. Lembre de ajustar o import para sua classe de
         // árvore binária
-        arvoreBinaria = new ArvoreBinaria(compPorMatricula);
-        Aluno aluno = new Aluno(123, "lorran");
-        arvoreBinaria.adicionar(aluno);
+        arvoreBinariaAluno = new ArvoreBinaria(compPorMatricula);
+        arvoreBinariaDiciplina = new ArvoreBinaria(compPorCodigo);
 
-        // Chamo o gerador para inserir 100 elementos nessa árvore de forma que fique
-        // degenerada
-//        gerador.geraArvoreDegenerada(100, arv);
-//        System.out.println("Árvore Degenerada Criada");
-//        // Imprimo a quantidade de nós e a altura da árvore resultante
-//        System.out.println("Quantidade de Nós: " + arv.quantidadeNos() + " Altura: " + arv.altura());
-//        arv = new ArvoreBinaria(compPorMatricula);
-//        gerador.geraArvoreDegenerada(200, arv);
-//        System.out.println("Árvore Degenerada Criada");
-//        System.out.println("Quantidade de Nós: " + arv.quantidadeNos() + " Altura: " + arv.altura());
-//        arv = new ArvoreBinaria(compPorMatricula);
-//        gerador.geraArvoreDegenerada(1000, arv);
-//        System.out.println("Árvore Degenerada Criada");
-//        System.out.println("Quantidade de Nós: " + arv.quantidadeNos() + " Altura: " + arv.altura());
+        Aluno aluno1 = new Aluno(123, "lorran");
+        Aluno aluno2 = new Aluno(1, "yasmim");
+        Aluno aluno3 = new Aluno(147, "fernanda");
+
+        arvoreBinariaAluno.adicionar(aluno1);
+        arvoreBinariaAluno.adicionar(aluno2);
+        arvoreBinariaAluno.adicionar(aluno3);
+
+        Disciplina diciplina1 = new Disciplina(1, "TGA", 30);
+        Disciplina diciplina2 = new Disciplina(2, "TGS", 30);
+        Disciplina diciplina3 = new Disciplina(3, "Analise de sistemas", 30);
+        Disciplina diciplina4 = new Disciplina(4, "Comunicacao empresarial", 30);
+        Disciplina diciplina5 = new Disciplina(5, "Estrutura de Dados", 30);
+
+        arvoreBinariaDiciplina.adicionar(diciplina1);
+        arvoreBinariaDiciplina.adicionar(diciplina2);
+        arvoreBinariaDiciplina.adicionar(diciplina3);
+        arvoreBinariaDiciplina.adicionar(diciplina4);
+        arvoreBinariaDiciplina.adicionar(diciplina5);
+        
     }
 
     /**
@@ -237,25 +247,25 @@ public class menuCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_getDisciButtonActionPerformed
 
     private void postAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postAlunoButtonMouseClicked
-        cadastroAluno = new CadastroAluno(arvoreBinaria);
+        cadastroAluno = new CadastroAluno(arvoreBinariaAluno);
         cadastroAluno.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_postAlunoButtonMouseClicked
 
     private void postDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postDisciButtonMouseClicked
-        cadastroDisciplina = new CadastroDisciplina(arvoreBinaria);
+        cadastroDisciplina = new CadastroDisciplina(arvoreBinariaDiciplina);
         cadastroDisciplina.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_postDisciButtonMouseClicked
 
     private void getAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getAlunoButtonMouseClicked
-        consultaAluno = new ConsultaAluno(arvoreBinaria);
+        consultaAluno = new ConsultaAluno(arvoreBinariaAluno);
         consultaAluno.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_getAlunoButtonMouseClicked
 
     private void getDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getDisciButtonMouseClicked
-        consultaDisciplina = new ConsultaDisciplina(arvoreBinaria);
+        consultaDisciplina = new ConsultaDisciplina(arvoreBinariaDiciplina);
         consultaDisciplina.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_getDisciButtonMouseClicked

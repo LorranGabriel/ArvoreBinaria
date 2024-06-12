@@ -1,5 +1,7 @@
 package tpa.sistemaacademico.app;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author victoriocarvalho
@@ -11,12 +13,13 @@ package tpa.sistemaacademico.app;
 public class Aluno  {
     private int matricula;
     private String nome;
+    ArrayList<Integer> disciplinas;
 
     public Aluno(int matricula, String nome){
         this.matricula = matricula;
-        this.nome = nome;        
+        this.nome = nome;    
+        this.disciplinas = new ArrayList();
     }
-
 
     public int getMatricula() {
         return matricula;
@@ -33,6 +36,12 @@ public class Aluno  {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-
+    
+    public ArrayList getDisciplinas() {
+        return disciplinas;
+    }
+    
+    public void setDisciplinas(int codigo) {
+        this.disciplinas.add(codigo);
+    }
 }
