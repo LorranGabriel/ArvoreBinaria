@@ -32,7 +32,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" max="32767" attributes="0"/>
+          <Component id="jPanel1" pref="808" max="32767" attributes="0"/>
           <Component id="jPanel2" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -237,26 +237,33 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="276" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" pref="436" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="codeDisciplinaField" alignment="0" min="-2" pref="689" max="-2" attributes="0"/>
-                              <Component id="nameDisciplinaField" alignment="0" min="-2" pref="689" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
-                              <Component id="cargaHorariaDisciplinaField" alignment="0" min="-2" pref="689" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="0" min="-2" pref="450" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="postButton" min="-2" pref="140" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="276" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" min="-2" pref="436" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jComboBox1" max="32767" attributes="0"/>
+                                      <Component id="codeDisciplinaField" alignment="0" pref="689" max="32767" attributes="0"/>
+                                      <Component id="nameDisciplinaField" alignment="0" pref="689" max="32767" attributes="0"/>
+                                      <Component id="jLabel4" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
+                                      <Component id="cargaHorariaDisciplinaField" alignment="0" pref="689" max="32767" attributes="0"/>
+                                      <Component id="jLabel1" alignment="0" min="-2" pref="381" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" alignment="0" min="-2" pref="450" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" alignment="0" min="-2" pref="561" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -268,7 +275,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="nameDisciplinaField" min="-2" pref="36" max="-2" attributes="0"/>
@@ -280,9 +287,13 @@
                   <Component id="jLabel5" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cargaHorariaDisciplinaField" min="-2" pref="36" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jLabel6" min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jComboBox1" min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace pref="64" max="32767" attributes="0"/>
                   <Component id="postButton" min="-2" pref="41" max="-2" attributes="0"/>
-                  <EmptySpace pref="249" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -370,6 +381,29 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cargaHorariaDisciplinaFieldActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="24" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Selecione Disciplinas Pr&#xe9;-Requisito Caso Possua:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBox1">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
