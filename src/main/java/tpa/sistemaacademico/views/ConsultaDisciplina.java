@@ -4,6 +4,7 @@
  */
 package tpa.sistemaacademico.views;
 
+import java.util.ArrayList;
 import javax.swing.UIManager;
 import tpa.sistemaacademico.app.Aluno;
 import tpa.sistemaacademico.app.ComparadorDisciplinaPorCodigo;
@@ -25,14 +26,22 @@ public class ConsultaDisciplina extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    ArvoreBinaria arvoreBinaria;
+    
+        
 
-    public ConsultaDisciplina(ArvoreBinaria arvore) {
+
+
+
+
+    ArvoreBinaria arvoreBinariaAluno;
+    ArvoreBinaria arvoreBinariaDisciplina;
+
+    public ConsultaDisciplina(ArvoreBinaria arvoreAluno, ArvoreBinaria arvoreDisci) {
         initComponents();
         this.setLocationRelativeTo(null);
-
-        arvoreBinaria = arvore;
-
+        
+        arvoreBinariaAluno = arvoreAluno;
+        arvoreBinariaDisciplina = arvoreDisci;
     }
 
     /**
@@ -277,44 +286,46 @@ public class ConsultaDisciplina extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(searchField))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cargaHoraria))
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addGap(28, 28, 28)
+                                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                            .addGap(30, 30, 30)
+                                            .addComponent(cargaHorariaField, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(prereqField))
+                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(codeField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(120, 120, 120)
                         .addComponent(errorLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addPrereq))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cargaHoraria))
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addComponent(cargaHorariaField, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(prereqField, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(codeField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(9, 9, 9)))
-                .addContainerGap(189, Short.MAX_VALUE))
+                        .addComponent(addPrereq)
+                        .addGap(54, 54, 54)))
+                .addGap(47, 47, 47))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,7 +344,7 @@ public class ConsultaDisciplina extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -345,14 +356,15 @@ public class ConsultaDisciplina extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(prereqField, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(addPrereq, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addComponent(errorLabel)
-                        .addGap(113, 113, 113))))
+                        .addGap(113, 113, 113))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(addPrereq, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -425,11 +437,23 @@ public class ConsultaDisciplina extends javax.swing.JFrame {
 
             Disciplina disciplina = new Disciplina( Integer.parseInt(searchField.getText()),"fantasy", 1 );
 
-            Disciplina novoItem = (Disciplina) arvoreBinaria.pesquisar(disciplina, compPorCodigo);
+            Disciplina novoItem = (Disciplina) arvoreBinariaAluno.pesquisar(disciplina, compPorCodigo);
             errorLabel.setText("");
             nameField.setText(novoItem.getNome());
             codeField.setText(Integer.toString(novoItem.getCodigo()));
-            cargaHorariaField.setText(Integer.toString(novoItem.getCargaHoraria())+ "horas semestrais");
+            cargaHorariaField.setText(Integer.toString(novoItem.getCargaHoraria())+ " horas semestrais");
+            String preReqs = "";
+            ArrayList<Integer> prerequisitos = novoItem.getPrerequisitos();
+            for (int i = 0; i < prerequisitos.size(); i++) {
+                Integer numero = prerequisitos.get(i);
+                Disciplina disciplinaP = new Disciplina(numero ,"fantasy", 1 );
+                Disciplina novoItemP = (Disciplina) arvoreBinariaAluno.pesquisar(disciplinaP, compPorCodigo);
+
+                preReqs += novoItemP.getNome() + "\n";
+                
+            }
+            
+            prereqField.setText(preReqs);
         }catch (Exception e) 
         {
             errorLabel.setText("O valor pesquisado deve ser um codigo valido!");
@@ -437,19 +461,19 @@ public class ConsultaDisciplina extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButtonMouseClicked
 
     private void postAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postAlunoButtonMouseClicked
-        cadastroAluno = new CadastroAluno(arvoreBinaria);
+        cadastroAluno = new CadastroAluno(arvoreBinariaAluno, arvoreBinariaDisciplina);
         cadastroAluno.setVisible(true);
         this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_postAlunoButtonMouseClicked
 
     private void postDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postDisciButtonMouseClicked
-        cadastroDisciplina = new CadastroDisciplina(arvoreBinaria);
+        cadastroDisciplina = new CadastroDisciplina(arvoreBinariaAluno, arvoreBinariaDisciplina);
         cadastroDisciplina.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_postDisciButtonMouseClicked
 
     private void getAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getAlunoButtonMouseClicked
-        consultaAluno = new ConsultaAluno(arvoreBinaria);
+        consultaAluno = new ConsultaAluno(arvoreBinariaAluno, arvoreBinariaDisciplina);
         consultaAluno.setVisible(true);
         this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_getAlunoButtonMouseClicked

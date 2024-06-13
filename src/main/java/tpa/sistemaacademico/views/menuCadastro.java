@@ -19,7 +19,7 @@ import tpa.sistemaacademico.lib.IArvoreBinaria;
 
 public class menuCadastro extends javax.swing.JFrame {
     public ArvoreBinaria arvoreBinariaAluno;
-    public ArvoreBinaria arvoreBinariaDiciplina;
+    public ArvoreBinaria arvoreBinariaDisciplina;
 
     public CadastroAluno cadastroAluno;
     public CadastroDisciplina cadastroDisciplina;
@@ -46,7 +46,7 @@ public class menuCadastro extends javax.swing.JFrame {
         // Instancio uma árvore binária. Lembre de ajustar o import para sua classe de
         // árvore binária
         arvoreBinariaAluno = new ArvoreBinaria(compPorMatricula);
-        arvoreBinariaDiciplina = new ArvoreBinaria(compPorCodigo);
+        arvoreBinariaDisciplina = new ArvoreBinaria(compPorCodigo);
 
         Aluno aluno1 = new Aluno(123, "lorran");
         Aluno aluno2 = new Aluno(1, "yasmim");
@@ -62,11 +62,11 @@ public class menuCadastro extends javax.swing.JFrame {
         Disciplina diciplina4 = new Disciplina(4, "Comunicacao empresarial", 30);
         Disciplina diciplina5 = new Disciplina(5, "Estrutura de Dados", 30);
 
-        arvoreBinariaDiciplina.adicionar(diciplina1);
-        arvoreBinariaDiciplina.adicionar(diciplina2);
-        arvoreBinariaDiciplina.adicionar(diciplina3);
-        arvoreBinariaDiciplina.adicionar(diciplina4);
-        arvoreBinariaDiciplina.adicionar(diciplina5);
+        arvoreBinariaDisciplina.adicionar(diciplina1);
+        arvoreBinariaDisciplina.adicionar(diciplina2);
+        arvoreBinariaDisciplina.adicionar(diciplina3);
+        arvoreBinariaDisciplina.adicionar(diciplina4);
+        arvoreBinariaDisciplina.adicionar(diciplina5);
         
     }
 
@@ -247,25 +247,25 @@ public class menuCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_getDisciButtonActionPerformed
 
     private void postAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postAlunoButtonMouseClicked
-        cadastroAluno = new CadastroAluno(arvoreBinariaAluno);
+        cadastroAluno = new CadastroAluno(arvoreBinariaAluno, arvoreBinariaDisciplina);
         cadastroAluno.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_postAlunoButtonMouseClicked
 
     private void postDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postDisciButtonMouseClicked
-        cadastroDisciplina = new CadastroDisciplina(arvoreBinariaDiciplina);
+        cadastroDisciplina = new CadastroDisciplina(arvoreBinariaAluno, arvoreBinariaDisciplina);
         cadastroDisciplina.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_postDisciButtonMouseClicked
 
     private void getAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getAlunoButtonMouseClicked
-        consultaAluno = new ConsultaAluno(arvoreBinariaAluno);
+        consultaAluno = new ConsultaAluno(arvoreBinariaAluno, arvoreBinariaDisciplina);
         consultaAluno.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_getAlunoButtonMouseClicked
 
     private void getDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getDisciButtonMouseClicked
-        consultaDisciplina = new ConsultaDisciplina(arvoreBinariaDiciplina);
+        consultaDisciplina = new ConsultaDisciplina(arvoreBinariaAluno, arvoreBinariaDisciplina);
         consultaDisciplina.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_getDisciButtonMouseClicked

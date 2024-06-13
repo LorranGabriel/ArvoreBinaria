@@ -109,13 +109,13 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     // Método para remover um valor da árvore
     @Override
-    public T remover(T valor) {
+    public T remover(T valor, Comparator comparador) {
         No<T> atual = raiz;
         No<T> pai = null;
         //Entra em loop enquanto o nó atual for nulo
         while(atual != null){
             //compara o valor a ser removido com o valor atual
-            int comp = comparador. compare(valor, atual.getValor());
+            int comp = comparador.compare(valor, atual.getValor());
             //compara se os valores são iguais
             if (comp == 0){
                 T valorRemovido = atual.getValor();
@@ -155,7 +155,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
                     //define o valor do sucessor do no atual
                     atual.setValor(sucessor.getValor());
                     //remove o sucessor
-                    remover(sucessor.getValor());
+                    remover(sucessor.getValor(), comparador);
                 }
                 //retorna o valor removido
                 return valorRemovido;
@@ -271,5 +271,22 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         //finaliza a reprensentação
         result.append("]");
         return result.toString();
+    }
+    
+    @Override
+    public ArrayList<T> listar() {
+        ArrayList<T> lista = new ArrayList<>();
+        listarRec(raiz, lista);
+        return lista;
+    }
+
+    private void listarRec(No<T> no, ArrayList<T> lista) {
+        if (no != null) {
+            // Adiciona o valor do nó à lista
+            lista.add(no.getValor());
+            // Chama recursivamente para o filho à esquerda e à direita
+            listarRec(no.getFilhoEsquerda(), lista);
+            listarRec(no.getFilhoDireita(), lista);
+        }
     }
 }

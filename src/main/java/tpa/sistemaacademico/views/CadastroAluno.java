@@ -21,10 +21,13 @@ public class CadastroAluno extends javax.swing.JFrame {
     public ConsultaAluno consultaAluno;
     public ConsultaDisciplina consultaDisciplina;
 
-    ArvoreBinaria arvoreBinaria;
-    public CadastroAluno(ArvoreBinaria arvore) {
+    ArvoreBinaria arvoreBinariaAluno;
+    ArvoreBinaria arvoreBinariaDisciplina;
+
+    public CadastroAluno(ArvoreBinaria arvoreAluno, ArvoreBinaria arvoreDisci) {
         initComponents();
-        arvoreBinaria = arvore;
+        arvoreBinariaAluno = arvoreAluno;
+        arvoreBinariaDisciplina = arvoreDisci;
         this.setLocationRelativeTo(null);
         
     }
@@ -222,18 +225,17 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addGap(129, 129, 129)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(nameAlunoField, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(matAlunoField, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameAlunoField, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(matAlunoField, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(355, 355, 355)
+                                .addGap(260, 260, 260)
                                 .addComponent(postAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(301, 301, 301)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,7 +254,7 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(matAlunoField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(37, 37, 37)
                 .addComponent(postAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -300,12 +302,12 @@ public class CadastroAluno extends javax.swing.JFrame {
 
     private void postAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postAlunoMouseClicked
         Aluno aluno = new Aluno( Integer.parseInt(matAlunoField.getText()), nameAlunoField.getText());
-        arvoreBinaria.adicionar(aluno);
-        System.out.println("Quantidade de Nós: " + arvoreBinaria.quantidadeNos() + " Altura: " + arvoreBinaria.altura());
+        arvoreBinariaAluno.adicionar(aluno);
+        System.out.println("Quantidade de Nós: " + arvoreBinariaAluno.quantidadeNos() + " Altura: " + arvoreBinariaAluno.altura());
     }//GEN-LAST:event_postAlunoMouseClicked
 
     private void getAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getAlunoButtonMouseClicked
-        consultaAluno = new ConsultaAluno(arvoreBinaria);
+        consultaAluno = new ConsultaAluno(arvoreBinariaAluno, arvoreBinariaDisciplina);
         consultaAluno.setVisible(true);
         this.setVisible(false); 
     }//GEN-LAST:event_getAlunoButtonMouseClicked
@@ -315,13 +317,13 @@ public class CadastroAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_postAlunoActionPerformed
 
     private void postDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postDisciButtonMouseClicked
-        cadastroDisciplina = new CadastroDisciplina(arvoreBinaria);
+        cadastroDisciplina = new CadastroDisciplina(arvoreBinariaAluno, arvoreBinariaDisciplina);
         cadastroDisciplina.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_postDisciButtonMouseClicked
 
     private void getDisciButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getDisciButtonMouseClicked
-        consultaDisciplina = new ConsultaDisciplina(arvoreBinaria);
+        consultaDisciplina = new ConsultaDisciplina(arvoreBinariaAluno, arvoreBinariaDisciplina);
         consultaDisciplina.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_getDisciButtonMouseClicked

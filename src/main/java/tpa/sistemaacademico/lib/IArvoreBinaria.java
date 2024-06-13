@@ -5,6 +5,7 @@
  */
 package tpa.sistemaacademico.lib;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -50,9 +51,10 @@ public interface IArvoreBinaria<T> {
     /**
      * Método que busca por um elemento na árvore e, caso encontre, o remove da árvore e o retorna
      * @param valor - será utilizado para passar o valor da chave a ser buscada. Por exemplo, se for um árvore de Alunos indexada por nome, deve-se passar um objeto do tipo aluno com o nome que se deseja buscar.
+     * @param comparador
      * @return caso tenha sido encontrado um elemento com o valor buscado, o elemento será removido da árvore e seu valor (do tipo T) será retornado. Caso contrário retorna null.
      */
-    public T remover(T valor);
+    public T remover(T valor, Comparator comparador);
     
     /**
      * Método que retorna a altura da árvore
@@ -78,5 +80,9 @@ public interface IArvoreBinaria<T> {
      * @return String contendo os toString dos valores armazenados nos nós, separados por " \n ". Os nós devem ser percorridos em ordem. A String deve iniciar com "[" e finalizar com "]"
      */
     public String caminharEmOrdem();
+       
+    
+    public ArrayList<T> listar();
+
 }
     
