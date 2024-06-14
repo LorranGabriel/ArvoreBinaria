@@ -19,7 +19,6 @@ tpa/sistemaacademico/views/init$3.class
 tpa/sistemaacademico/views/CadastroAluno$6.class
 tpa/sistemaacademico/views/menuCadastro.class
 tpa/sistemaacademico/views/CadastroDisciplina$5.class
-tpa/sistemaacademico/views/ConsultaDisciplina$13.class
 tpa/sistemaacademico/views/CadastroAluno$9.class
 tpa/sistemaacademico/views/ConsultaDisciplina$6.class
 tpa/sistemaacademico/app/Aluno.class
@@ -61,6 +60,7 @@ tpa/sistemaacademico/views/ConsultaDisciplina$9.class
 tpa/sistemaacademico/views/CadastroDisciplina$2.class
 tpa/sistemaacademico/views/ConsultaAluno$5.class
 tpa/sistemaacademico/views/ConsultaDisciplina$1.class
+tpa/sistemaacademico/views/ConsultaAluno$13.class
 tpa/sistemaacademico/views/VincularDiciplinaAluno$3.class
 tpa/sistemaacademico/views/CadastroDisciplina.class
 tpa/sistemaacademico/views/ConsultaAluno$6.class
