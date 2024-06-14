@@ -108,69 +108,79 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     }
 
     // Método para remover um valor da árvore
-    @Override
-    public T remover(T valor, Comparator comparador) {
-        No<T> atual = raiz;
-        No<T> pai = null;
-        //Entra em loop enquanto o nó atual for nulo
-        while(atual != null){
-            //compara o valor a ser removido com o valor atual
-            int comp = comparador.compare(valor, atual.getValor());
-            //compara se os valores são iguais
-            if (comp == 0){
-                T valorRemovido = atual.getValor();
-                //verifica os casos de remoção
-                if(atual.getFilhoEsquerda() == null && atual.getFilhoDireita() == null){
-                    // 1: O nó não tem filhos
-                    if (pai == null){
-                        raiz = null;
-                    } else if (pai.getFilhoEsquerda() == atual) {
-                        pai.setFilhoEsquerda(null);
-                    }else {
-                        pai.setFilhoDireita(null);
-                    }
-                } else if (atual.getFilhoEsquerda() != null && atual.getFilhoDireita() == null) {
-                    // 2: O nó tem um filho à esquerda
-                    if (pai == null){
-                        raiz = atual.getFilhoEsquerda();
-                    } else if (pai.getFilhoEsquerda() == atual) {
-                        pai.setFilhoEsquerda(atual.getFilhoEsquerda());
-                    }else{
-                        pai.setFilhoDireita(atual.getFilhoEsquerda());
-                    }
-                } else if (atual.getFilhoEsquerda() == null && atual.getFilhoDireita() != null) {
-                    //3: O nó tem um filho à direita
-                    if (pai == null){
-                        raiz = atual.getFilhoDireita();
+@Override
+public T remover(T valor, Comparator comparador) {
+    No<T> atual = raiz;
+    No<T> pai = null;
 
-                    } else if (pai.getFilhoEsquerda()==atual) {
-                        pai.setFilhoEsquerda(atual.getFilhoDireita());
-                    }else{
-                        pai.setFilhoDireita(atual.getFilhoDireita());
-                    }
-                }else{
-                    //4: O nó tem dois filhos
-                    //encontra um sucessor do nó atual na subarvore direita
-                    No<T> sucessor = encontrarSucessor(atual.getFilhoDireita());
-                    //define o valor do sucessor do no atual
-                    atual.setValor(sucessor.getValor());
-                    //remove o sucessor
-                    remover(sucessor.getValor(), comparador);
+    // Entra em loop enquanto o nó atual não for nulo
+    while (atual != null) {
+        int comp = comparador.compare(valor, atual.getValor());
+
+        if (comp == 0) {  // Valor encontrado
+            T valorRemovido = atual.getValor();
+
+            // Caso 1: O nó não tem filhos
+            if (atual.getFilhoEsquerda() == null && atual.getFilhoDireita() == null) {
+                if (pai == null) {
+                    raiz = null;
+                } else if (pai.getFilhoEsquerda() == atual) {
+                    pai.setFilhoEsquerda(null);
+                } else {
+                    pai.setFilhoDireita(null);
                 }
-                //retorna o valor removido
-                return valorRemovido;
-            }else if (comp < 0){
-                //se o valor for menor, move para a esquerda
-                pai = atual;
-                atual = atual.getFilhoEsquerda();
-            }else {
-                //se o valor for maior, move para a direita na arvore
-                pai = atual;
-                atual = atual.getFilhoDireita();
             }
+            // Caso 2: O nó tem um filho à esquerda
+            else if (atual.getFilhoEsquerda() != null && atual.getFilhoDireita() == null) {
+                if (pai == null) {
+                    raiz = atual.getFilhoEsquerda();
+                } else if (pai.getFilhoEsquerda() == atual) {
+                    pai.setFilhoEsquerda(atual.getFilhoEsquerda());
+                } else {
+                    pai.setFilhoDireita(atual.getFilhoEsquerda());
+                }
+            }
+            // Caso 3: O nó tem um filho à direita
+            else if (atual.getFilhoEsquerda() == null && atual.getFilhoDireita() != null) {
+                if (pai == null) {
+                    raiz = atual.getFilhoDireita();
+                } else if (pai.getFilhoEsquerda() == atual) {
+                    pai.setFilhoEsquerda(atual.getFilhoDireita());
+                } else {
+                    pai.setFilhoDireita(atual.getFilhoDireita());
+                }
+            }
+            // Caso 4: O nó tem dois filhos
+            else {
+                No<T> sucessorPai = atual;
+                No<T> sucessor = atual.getFilhoDireita();
+                while (sucessor.getFilhoEsquerda() != null) {
+                    sucessorPai = sucessor;
+                    sucessor = sucessor.getFilhoEsquerda();
+                }
+
+                // Substitui o valor do nó atual pelo valor do sucessor
+                atual.setValor(sucessor.getValor());
+
+                // Remove o sucessor
+                if (sucessorPai.getFilhoEsquerda() == sucessor) {
+                    sucessorPai.setFilhoEsquerda(sucessor.getFilhoDireita());
+                } else {
+                    sucessorPai.setFilhoDireita(sucessor.getFilhoDireita());
+                }
+            }
+            return valorRemovido;
+        } else if (comp < 0) {  // Valor menor, move para a esquerda
+            pai = atual;
+            atual = atual.getFilhoEsquerda();
+        } else {  // Valor maior, move para a direita
+            pai = atual;
+            atual = atual.getFilhoDireita();
         }
-        return null;
     }
+    return null;
+}
+
 
     // Método auxiliar para encontrar o sucessor de um nó
     private No<T> encontrarSucessor(No<T> atual){

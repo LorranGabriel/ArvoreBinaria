@@ -6,6 +6,10 @@ package tpa.sistemaacademico.views;
 
 import java.util.ArrayList;
 import tpa.sistemaacademico.app.Aluno;
+import tpa.sistemaacademico.app.ComparadorAlunoPorNome;
+import tpa.sistemaacademico.app.ComparadorDisciplinaPorCodigo;
+import tpa.sistemaacademico.app.ComparadorDisciplinaPorNome;
+import tpa.sistemaacademico.app.Disciplina;
 import tpa.sistemaacademico.lib.ArvoreBinaria;
 
 /**
@@ -23,14 +27,22 @@ public class VincularDiciplinaAluno extends javax.swing.JFrame {
 
     public VincularDiciplinaAluno(ArvoreBinaria arvoreAluno, ArvoreBinaria arvoreDisci) {
         initComponents();
+        this.setLocationRelativeTo(null);
+
         arvoreBinariaAluno = arvoreAluno;
         arvoreBinariaDisciplina = arvoreDisci;
         
         ArrayList <Aluno> listaAlunos = arvoreBinariaAluno.listar();
+        ArrayList <Disciplina> listaDisciplinas = arvoreBinariaDisciplina.listar();
         
         for (Aluno aluno : listaAlunos) {
             AlunoComboBox.addItem(aluno.getNome());
         }
+        
+        for (Disciplina disciplina : listaDisciplinas) {
+            DisciplinaComboBox.addItem(disciplina.getNome());
+        }
+        
     }
 
     
@@ -46,54 +58,165 @@ public class VincularDiciplinaAluno extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         AlunoComboBox = new javax.swing.JComboBox<>();
         DisciplinaComboBox = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        vincularAluno = new javax.swing.JButton();
+        cancelarButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        errorField = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        DisciplinaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        DisciplinaComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DisciplinaComboBoxActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("jButton1");
+        vincularAluno.setText("Vincular");
+        vincularAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vincularAlunoMouseClicked(evt);
+            }
+        });
+
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelarButtonMouseClicked(evt);
+            }
+        });
+
+        errorField.setBackground(new java.awt.Color(242, 242, 242));
+        errorField.setColumns(20);
+        errorField.setRows(5);
+        jScrollPane1.setViewportView(errorField);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(355, 355, 355)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(AlunoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addComponent(DisciplinaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(158, 158, 158))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DisciplinaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AlunoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(vincularAluno)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cancelarButton)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(AlunoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(DisciplinaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 72, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DisciplinaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AlunoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(76, 76, 76))
+                    .addComponent(cancelarButton)
+                    .addComponent(vincularAluno))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void DisciplinaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisciplinaComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DisciplinaComboBoxActionPerformed
+
+    private void cancelarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarButtonMouseClicked
+        this.setVisible(false);// TODO add your handling code here:
+    }//GEN-LAST:event_cancelarButtonMouseClicked
+
+    private void vincularAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vincularAlunoMouseClicked
+        ComparadorAlunoPorNome compAlunoPorNome = new ComparadorAlunoPorNome();
+        ComparadorDisciplinaPorNome compDisciplinaPorNome = new ComparadorDisciplinaPorNome();
+        ComparadorDisciplinaPorCodigo compDisciplinaPorCodigo = new ComparadorDisciplinaPorCodigo();
+
+        String alunoSelecionado = (String) AlunoComboBox.getSelectedItem();
+        String disciplinaSelecionada = (String) DisciplinaComboBox.getSelectedItem();
+
+        if (alunoSelecionado == null || disciplinaSelecionada == null) {
+            errorField.setText("Selecione um aluno e uma disciplina.");
+            return;
+        }
+
+        Aluno aluno = new Aluno(-1, alunoSelecionado);
+        Disciplina disciplina = new Disciplina(-1, disciplinaSelecionada, -1);
+
+        Aluno novoAluno = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compAlunoPorNome);
+        Disciplina novoDisciplina = (Disciplina) arvoreBinariaDisciplina.pesquisar(disciplina, compDisciplinaPorNome);
+
+        if (novoAluno == null) {
+            errorField.setText("Aluno não encontrado.");
+            return;
+        }
+        if (novoDisciplina == null) {
+            errorField.setText("Disciplina não encontrada.");
+            return;
+        }
+
+        ArrayList<Integer> cursadas = novoAluno.getDisciplinas();
+        if (cursadas == null) {
+            cursadas = new ArrayList<>();
+        }
+
+        if (cursadas.contains(novoDisciplina.getCodigo())) {
+            errorField.setText("Disciplina já cursada/vinculada.");
+        } else {
+            ArrayList<Integer> preReqs = novoDisciplina.getPrerequisitos();
+            ArrayList<Disciplina> disciplinasFaltantes = new ArrayList<>();
+            String disciplinasFaltantesLabel = "";
+
+            for (int i = 0; i < preReqs.size(); i++) {
+                Integer elemento = preReqs.get(i);
+                if (!cursadas.contains(elemento)) {
+                    Disciplina disciplinaBusca = new Disciplina(elemento, "fantasy", -1);
+                    Disciplina novoNaoCursada = (Disciplina) arvoreBinariaDisciplina.pesquisar(disciplinaBusca, compDisciplinaPorCodigo);
+                    if (novoNaoCursada != null) {
+                        disciplinasFaltantes.add(novoNaoCursada);
+                    }
+                }
+            }
+
+            if (disciplinasFaltantes.isEmpty()) {
+                novoAluno.setDisciplinas(novoDisciplina.getCodigo());
+                this.setVisible(false);
+            } else {
+                for (Disciplina elemento : disciplinasFaltantes) {
+                    disciplinasFaltantesLabel += elemento.getNome() + "\n";
+                }
+                errorField.setText("Faltam os pré-requisitos: \n" + disciplinasFaltantesLabel);
+            }
+        }
+    }//GEN-LAST:event_vincularAlunoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -102,7 +225,10 @@ public class VincularDiciplinaAluno extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> AlunoComboBox;
     private javax.swing.JComboBox<String> DisciplinaComboBox;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton cancelarButton;
+    private javax.swing.JTextArea errorField;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton vincularAluno;
     // End of variables declaration//GEN-END:variables
 }

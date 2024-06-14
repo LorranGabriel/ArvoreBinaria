@@ -29,6 +29,7 @@ public class menuCadastro extends javax.swing.JFrame {
     /**
      * Creates new form menuCadastro
      */
+    
     public menuCadastro() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -61,13 +62,15 @@ public class menuCadastro extends javax.swing.JFrame {
         Disciplina diciplina3 = new Disciplina(3, "Analise de sistemas", 30);
         Disciplina diciplina4 = new Disciplina(4, "Comunicacao empresarial", 30);
         Disciplina diciplina5 = new Disciplina(5, "Estrutura de Dados", 30);
+        
+        diciplina1.setPrerequisitos(2);
+        diciplina1.setPrerequisitos(4);
 
         arvoreBinariaDisciplina.adicionar(diciplina1);
         arvoreBinariaDisciplina.adicionar(diciplina2);
         arvoreBinariaDisciplina.adicionar(diciplina3);
         arvoreBinariaDisciplina.adicionar(diciplina4);
         arvoreBinariaDisciplina.adicionar(diciplina5);
-        
     }
 
     /**

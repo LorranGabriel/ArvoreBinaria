@@ -3,10 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package tpa.sistemaacademico.views;
+import java.util.ArrayList;
 import javax.swing.*;
 import tpa.sistemaacademico.app.Aluno;
 import tpa.sistemaacademico.app.ComparadorAlunoPorMatricula;
 import tpa.sistemaacademico.app.ComparadorAlunoPorNome;
+import tpa.sistemaacademico.app.ComparadorDisciplinaPorCodigo;
+import tpa.sistemaacademico.app.Disciplina;
 import tpa.sistemaacademico.app.GeradorDeArvores;
 import tpa.sistemaacademico.lib.ArvoreBinaria;
 import tpa.sistemaacademico.lib.IArvoreBinaria;
@@ -21,6 +24,7 @@ public class ConsultaAluno extends javax.swing.JFrame {
     public CadastroDisciplina cadastroDisciplina;
     public ConsultaAluno consultaAluno;
     public ConsultaDisciplina consultaDisciplina;
+    public VincularDiciplinaAluno vincularDiciplinaAluno;
     public Aluno aluno;
     /**
      * Creates new form ConsultaAluno
@@ -55,14 +59,15 @@ public class ConsultaAluno extends javax.swing.JFrame {
         nameField = new javax.swing.JTextField();
         matField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jTextArea2 = new javax.swing.JTextArea();
+        cursadasField = new javax.swing.JTextArea();
         errorLabel = new javax.swing.JLabel();
         nameSerach = new javax.swing.JCheckBox();
         searchButton = new javax.swing.JButton();
         searchField = new javax.swing.JTextPane();
         delAlunoButton = new javax.swing.JButton();
+        VincularAlunoDisciplinaButton = new javax.swing.JButton();
+        errorDelLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         postDisciButton = new javax.swing.JButton();
         getDisciButton = new javax.swing.JButton();
@@ -102,19 +107,12 @@ public class ConsultaAluno extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Matrícula:");
 
-        jButton9.setText("🔎");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("<html>Disciplinas<br> Cursadas:");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
+        cursadasField.setColumns(20);
+        cursadasField.setRows(5);
 
         nameSerach.setText("Busca por Matricula");
         nameSerach.addItemListener(new java.awt.event.ItemListener() {
@@ -149,6 +147,13 @@ public class ConsultaAluno extends javax.swing.JFrame {
             }
         });
 
+        VincularAlunoDisciplinaButton.setText("Vincular disciplina a aluno");
+        VincularAlunoDisciplinaButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VincularAlunoDisciplinaButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -156,40 +161,43 @@ public class ConsultaAluno extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(3, 3, 3)
-                                                .addComponent(matField, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextArea2, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56)
-                                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(nameSerach)
-                        .addGap(166, 166, 166)
+                        .addGap(474, 474, 474)
                         .addComponent(errorLabel))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(572, 572, 572)
-                        .addComponent(delAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(603, Short.MAX_VALUE))
+                        .addGap(110, 110, 110)
+                        .addComponent(VincularAlunoDisciplinaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(238, 238, 238)
+                        .addComponent(delAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(44, 44, 44)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(40, 40, 40)
+                                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addGap(3, 3, 3)
+                                            .addComponent(matField, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cursadasField, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGap(55, 55, 55)
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(56, 56, 56)
+                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(501, 501, 501)
+                        .addComponent(errorDelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(611, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,13 +205,11 @@ public class ConsultaAluno extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(1, 1, 1)))
+                        .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(errorLabel)
@@ -211,9 +217,9 @@ public class ConsultaAluno extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(nameSerach)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(matField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,9 +227,16 @@ public class ConsultaAluno extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextArea2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(90, 90, 90)
-                .addComponent(delAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cursadasField, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(errorDelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(delAlunoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(VincularAlunoDisciplinaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(272, Short.MAX_VALUE))
         );
 
@@ -403,53 +416,70 @@ public class ConsultaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_postAlunoButtonActionPerformed
 
     private void delAlunoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delAlunoButtonMouseClicked
-        // TODO add your handling code here:
+       // Comparadores usados para pesquisar e remover alunos
         ComparadorAlunoPorMatricula compPorMatricula = new ComparadorAlunoPorMatricula();
         ComparadorAlunoPorNome compPorNome = new ComparadorAlunoPorNome();
 
-        try{
-            if (is_name)
-            {
-                aluno = new Aluno( -1, searchField.getText());
+        try {
+            if (is_name) {
+                aluno = new Aluno(-1, searchField.getText());
+
                 try {
                     Aluno novoItem = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compPorNome);
-                    arvoreBinariaAluno.remover(novoItem, compPorNome);
-                }
-                catch (Exception e)
-                {
-                    errorLabel.setText("O valor pesquisado deve ser um nome valido");
-                }
-            }
-            else
-            {
-                aluno = new Aluno( Integer.parseInt(searchField.getText()), "");
-                try {
-                    Aluno novoItem = (Aluno) arvoreBinariaAluno.pesquisar( aluno, compPorMatricula);
-                    arvoreBinariaAluno.remover(novoItem, compPorMatricula);
+                    if (novoItem == null) {
+                        errorDelLabel.setText("Aluno não encontrado pelo nome.");
+                    } else {
+                        arvoreBinariaAluno.remover(novoItem, compPorNome);
+                        errorDelLabel.setText("Aluno removido com sucesso.");
+                    }
                 } catch (Exception e) {
-                    errorLabel.setText("O valor pesquisado deve ser um numero inteiro");
+                    errorDelLabel.setText("Erro ao remover o aluno pelo nome: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    int matricula = Integer.parseInt(searchField.getText());
+                    aluno = new Aluno(matricula, "");
+
+                    Aluno novoItem = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compPorMatricula);
+                    if (novoItem == null) {
+                        errorDelLabel.setText("Aluno não encontrado pela matrícula.");
+                    } else {
+                        arvoreBinariaAluno.remover(novoItem, compPorMatricula);
+                        errorDelLabel.setText("Aluno removido com sucesso.");
+                    }
+                } catch (NumberFormatException e) {
+                    errorDelLabel.setText("O valor pesquisado deve ser um número inteiro válido.");
+                } catch (Exception e) {
+                    errorDelLabel.setText("Erro ao remover o aluno pela matrícula: " + e.getMessage());
+                    e.printStackTrace();
                 }
             }
-        }catch (Exception e)
-        {
-            errorLabel.setText("Voce deve digitar algo na caixa de busca!");
+        } catch (Exception e) {
+            errorDelLabel.setText("Você deve digitar algo na caixa de busca!");
+            e.printStackTrace();
         }
+
     }//GEN-LAST:event_delAlunoButtonMouseClicked
 
     private void searchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseClicked
 
         ComparadorAlunoPorMatricula compPorMatricula = new ComparadorAlunoPorMatricula();
         ComparadorAlunoPorNome compPorNome = new ComparadorAlunoPorNome();
+        ComparadorDisciplinaPorCodigo compDisciplinaPorCodigo = new ComparadorDisciplinaPorCodigo();
 
+        Aluno novoItem = null;
+        ArrayList<Integer> cursadas = null;
         try{
             if (is_name)
             {
                 aluno = new Aluno( -1, searchField.getText());
                 try {
-                    Aluno novoItem = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compPorNome);
+                    novoItem = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compPorNome);
                     errorLabel.setText("");
                     nameField.setText(novoItem.getNome());
                     matField.setText(Integer.toString(novoItem.getMatricula()));
+                    cursadas = novoItem.getDisciplinas();
                 }
                 catch (Exception e)
                 {
@@ -460,14 +490,28 @@ public class ConsultaAluno extends javax.swing.JFrame {
             {
                 aluno = new Aluno( Integer.parseInt(searchField.getText()), "");
                 try {
-                    Aluno novoItem = (Aluno) arvoreBinariaAluno.pesquisar( aluno, compPorMatricula);
+                    novoItem = (Aluno) arvoreBinariaAluno.pesquisar( aluno, compPorMatricula);
                     errorLabel.setText("");
                     nameField.setText(novoItem.getNome());
                     matField.setText(Integer.toString(novoItem.getMatricula()));
+                    cursadas = novoItem.getDisciplinas();
                 } catch (Exception e) {
                     errorLabel.setText("O valor pesquisado deve ser um numero inteiro");
                 }
             }
+            
+            String disciplinasCadastradas = "";
+            if(cursadas != null){
+                for (int i = 0; i < cursadas.size(); i++) {
+                    Integer elemento = cursadas.get(i);
+                    Disciplina disciplinaBusca = new Disciplina(elemento, "fantasy", -1);
+                    Disciplina novoCursada = (Disciplina) arvoreBinariaDisciplina.pesquisar(disciplinaBusca, compDisciplinaPorCodigo);
+                    disciplinasCadastradas += novoCursada.getNome()+"\n";
+                }
+                cursadasField.setText(disciplinasCadastradas);
+            }
+         
+            
         }catch (Exception e)
         {
             errorLabel.setText("Voce deve digitar algo na caixa de busca!");
@@ -482,21 +526,24 @@ public class ConsultaAluno extends javax.swing.JFrame {
         is_name= !is_name;
     }//GEN-LAST:event_nameSerachItemStateChanged
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
-
     private void matFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_matFieldActionPerformed
+
+    private void VincularAlunoDisciplinaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VincularAlunoDisciplinaButtonMouseClicked
+        vincularDiciplinaAluno = new VincularDiciplinaAluno(arvoreBinariaAluno, arvoreBinariaDisciplina);
+        vincularDiciplinaAluno.setVisible(true);
+    }//GEN-LAST:event_VincularAlunoDisciplinaButtonMouseClicked
                                      
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton VincularAlunoDisciplinaButton;
+    private javax.swing.JTextArea cursadasField;
     private javax.swing.JButton delAlunoButton;
+    private javax.swing.JLabel errorDelLabel;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JButton getAlunoButton;
     private javax.swing.JButton getDisciButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -505,7 +552,6 @@ public class ConsultaAluno extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField matField;
     private javax.swing.JTextField nameField;
     private javax.swing.JCheckBox nameSerach;

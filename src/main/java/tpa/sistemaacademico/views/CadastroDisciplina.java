@@ -59,7 +59,6 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         codeDisciplinaField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cargaHorariaDisciplinaField = new javax.swing.JTextField();
-        VincularAlunoDisciplinaButton = new javax.swing.JButton();
         preRequisitosField = new javax.swing.JTextField();
         preReqLabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -238,13 +237,6 @@ public class CadastroDisciplina extends javax.swing.JFrame {
             }
         });
 
-        VincularAlunoDisciplinaButton.setText("Vincular disciplina a aluno");
-        VincularAlunoDisciplinaButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                VincularAlunoDisciplinaButtonMouseClicked(evt);
-            }
-        });
-
         preRequisitosField.setToolTipText("Insira a carga horaria da disciplina");
         preRequisitosField.setPreferredSize(new java.awt.Dimension(64, 26));
         preRequisitosField.addActionListener(new java.awt.event.ActionListener() {
@@ -262,6 +254,10 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(postButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -280,12 +276,6 @@ public class CadastroDisciplina extends javax.swing.JFrame {
                             .addComponent(preReqLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(VincularAlunoDisciplinaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(postButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,10 +301,8 @@ public class CadastroDisciplina extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(preRequisitosField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(postButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(VincularAlunoDisciplinaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85))
+                .addComponent(postButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -407,14 +395,7 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_preRequisitosFieldActionPerformed
 
-    private void VincularAlunoDisciplinaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VincularAlunoDisciplinaButtonMouseClicked
-        vincularDiciplinaAluno = new VincularDiciplinaAluno(arvoreBinariaAluno, arvoreBinariaDisciplina);
-        cadastroAluno.setVisible(true);
-        this.setVisible(false); 
-    }//GEN-LAST:event_VincularAlunoDisciplinaButtonMouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton VincularAlunoDisciplinaButton;
     private javax.swing.JTextField cargaHorariaDisciplinaField;
     private javax.swing.JTextField codeDisciplinaField;
     private javax.swing.JButton getAlunoButton;

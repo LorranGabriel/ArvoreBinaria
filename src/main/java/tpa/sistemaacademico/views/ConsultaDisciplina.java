@@ -27,11 +27,6 @@ public class ConsultaDisciplina extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     
-        
-
-
-
-
 
     ArvoreBinaria arvoreBinariaAluno;
     ArvoreBinaria arvoreBinariaDisciplina;
@@ -431,32 +426,51 @@ public class ConsultaDisciplina extends javax.swing.JFrame {
     }//GEN-LAST:event_addPrereqMouseClicked
 
     private void searchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseClicked
-        
-        try{
+
+        try {
             ComparadorDisciplinaPorCodigo compPorCodigo = new ComparadorDisciplinaPorCodigo();
 
-            Disciplina disciplina = new Disciplina( Integer.parseInt(searchField.getText()),"fantasy", 1 );
+            int codigo;
+            try {
+                codigo = Integer.parseInt(searchField.getText());
+            } catch (NumberFormatException e) {
+                errorLabel.setText("O valor pesquisado deve ser um código válido!");
+                return;
+            }
 
-            Disciplina novoItem = (Disciplina) arvoreBinariaAluno.pesquisar(disciplina, compPorCodigo);
+            Disciplina disciplina = new Disciplina(codigo, "fantasy", 1);
+
+            // Certifique-se de que arvoreBinariaAluno é do tipo correto
+            Disciplina novoItem = (Disciplina) arvoreBinariaDisciplina.pesquisar(disciplina, compPorCodigo);
+            if (novoItem == null) {
+                errorLabel.setText("Disciplina não encontrada!");
+                return;
+            }
+
             errorLabel.setText("");
             nameField.setText(novoItem.getNome());
             codeField.setText(Integer.toString(novoItem.getCodigo()));
-            cargaHorariaField.setText(Integer.toString(novoItem.getCargaHoraria())+ " horas semestrais");
+            cargaHorariaField.setText(Integer.toString(novoItem.getCargaHoraria()) + " horas semestrais");
+
             String preReqs = "";
             ArrayList<Integer> prerequisitos = novoItem.getPrerequisitos();
             for (int i = 0; i < prerequisitos.size(); i++) {
                 Integer numero = prerequisitos.get(i);
-                Disciplina disciplinaP = new Disciplina(numero ,"fantasy", 1 );
-                Disciplina novoItemP = (Disciplina) arvoreBinariaAluno.pesquisar(disciplinaP, compPorCodigo);
+                Disciplina disciplinaP = new Disciplina(numero, "fantasy", 1);
+                Disciplina novoItemP = (Disciplina) arvoreBinariaDisciplina.pesquisar(disciplinaP, compPorCodigo);
+
+                if (novoItemP == null) {
+                    errorLabel.setText("Pré-requisito não encontrado: " + numero);
+                    return;
+                }
 
                 preReqs += novoItemP.getNome() + "\n";
-                
             }
-            
+
             prereqField.setText(preReqs);
-        }catch (Exception e) 
-        {
-            errorLabel.setText("O valor pesquisado deve ser um codigo valido!");
+        } catch (Exception e) {
+            errorLabel.setText("Ocorreu um erro inesperado: " + e.getMessage());
+            e.printStackTrace(); // Para depuração, remova isso em produção
         }
     }//GEN-LAST:event_searchButtonMouseClicked
 

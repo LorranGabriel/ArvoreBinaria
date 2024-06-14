@@ -3,7 +3,7 @@ tpa/sistemaacademico/views/menuCadastro$10.class
 tpa/sistemaacademico/views/menuCadastro$2.class
 tpa/sistemaacademico/lib/ArvoreBinaria.class
 tpa/sistemaacademico/app/AppRelatorioArvoreBinaria.class
-tpa/sistemaacademico/views/CadastroDisciplina$14.class
+tpa/sistemaacademico/views/VincularDiciplinaAluno$2.class
 tpa/sistemaacademico/app/GeradorDeArvores.class
 tpa/sistemaacademico/views/ConsultaDisciplina$3.class
 tpa/sistemaacademico/views/menuCadastro$9.class
@@ -34,6 +34,8 @@ tpa/sistemaacademico/views/CadastroDisciplina$7.class
 tpa/sistemaacademico/views/CadastroDisciplina$13.class
 tpa/sistemaacademico/views/CadastroAluno$3.class
 tpa/sistemaacademico/app/Disciplina.class
+tpa/sistemaacademico/views/VincularDiciplinaAluno$1.class
+tpa/sistemaacademico/app/ComparadorDisciplinaPorNome.class
 tpa/sistemaacademico/views/CadastroAluno$7.class
 tpa/sistemaacademico/views/ConsultaDisciplina$7.class
 tpa/sistemaacademico/views/ConsultaAluno$11.class
@@ -59,6 +61,7 @@ tpa/sistemaacademico/views/ConsultaDisciplina$9.class
 tpa/sistemaacademico/views/CadastroDisciplina$2.class
 tpa/sistemaacademico/views/ConsultaAluno$5.class
 tpa/sistemaacademico/views/ConsultaDisciplina$1.class
+tpa/sistemaacademico/views/VincularDiciplinaAluno$3.class
 tpa/sistemaacademico/views/CadastroDisciplina.class
 tpa/sistemaacademico/views/ConsultaAluno$6.class
 tpa/sistemaacademico/views/menuCadastro$3.class
