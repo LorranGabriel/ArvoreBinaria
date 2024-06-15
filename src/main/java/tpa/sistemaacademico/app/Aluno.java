@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Aluno  {
     private int matricula;
     private String nome;
-    ArrayList<Integer> disciplinas;
+    ArrayList<Disciplina> disciplinas;
 
     public Aluno(int matricula, String nome){
         this.matricula = matricula;
@@ -41,7 +41,7 @@ public class Aluno  {
         return disciplinas;
     }
     
-    public void setDisciplinas(int codigo) {
-        this.disciplinas.add(codigo);
+    public void setDisciplinas(Disciplina disciplina) {
+        this.disciplinas.add(disciplina);
     }
 }

@@ -14,7 +14,7 @@ public class Disciplina  {
     private int codigo;
     private String nome;
     private int cargaHoraria;
-    ArrayList<Integer> prerequisitos;
+    ArrayList<Disciplina> prerequisitos;
 
     public Disciplina(int codigo, String nome, int cargaHoraria){
         this.codigo = codigo;
@@ -52,7 +52,7 @@ public class Disciplina  {
         return prerequisitos;
     }
     
-    public void setPrerequisitos(int codigo) {
-        this.prerequisitos.add(codigo);
+    public void setPrerequisitos(Disciplina disciplina) {
+        this.prerequisitos.add(disciplina);
     }
 }

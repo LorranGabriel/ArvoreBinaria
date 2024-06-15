@@ -61,12 +61,12 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         cargaHorariaDisciplinaField = new javax.swing.JTextField();
         preRequisitosField = new javax.swing.JTextField();
         preReqLabel = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        labelDisciplina = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setAlignmentY(0.0F);
         jPanel1.setPreferredSize(new java.awt.Dimension(270, 800));
@@ -126,7 +126,6 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton1.setIcon(UIManager.getIcon("FileChooser.homeFolderIcon"));
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +187,7 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         jPanel2.setAlignmentX(1.0F);
         jPanel2.setAlignmentY(1.0F);
         jPanel2.setMaximumSize(new java.awt.Dimension(1010, 800));
@@ -215,7 +214,6 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Cadastro de Disciplina");
-        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         nameDisciplinaField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nameDisciplinaField.setToolTipText("Insira o nome da disciplina");
@@ -248,7 +246,7 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         preReqLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         preReqLabel.setText("Escolha os Pré-Requisitos (caso haja)");
 
-        jLabel6.setText("Digite os códigos de disciplina separados por espaço em branco. Ex.: 46 1 13 76");
+        labelDisciplina.setText("Digite os códigos de disciplina separados por espaço em branco. Ex.: 46 1 13 76");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -272,7 +270,7 @@ public class CadastroDisciplina extends javax.swing.JFrame {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(preRequisitosField, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(preReqLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(labelDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -295,7 +293,7 @@ public class CadastroDisciplina extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(preReqLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(labelDisciplina)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(preRequisitosField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
@@ -384,7 +382,21 @@ public class CadastroDisciplina extends javax.swing.JFrame {
         if(!"".equals(preReqs)){
             String[] reqs = preReqs.split(" ");
             for (String req : reqs) {
-               disciplina.setPrerequisitos(Integer.parseInt(req)); 
+                Disciplina disciplinaPesquisa = new Disciplina( Integer.parseInt(req), "", -1);
+
+                Disciplina novaDisciplina = (Disciplina) arvoreBinariaDisciplina.pesquisar(disciplinaPesquisa);
+                try {
+                    if (novaDisciplina.getNome() == null){
+                        labelDisciplina.setText("Disciplina nao encontrada");
+                    }
+                    else{
+                        disciplina.setPrerequisitos(novaDisciplina); 
+                    }
+                } catch (Exception e) {
+                    labelDisciplina.setText("Disciplina nao encontrada");
+                }
+
+        
            }
         }
 
@@ -407,10 +419,10 @@ public class CadastroDisciplina extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel labelDisciplina;
     private javax.swing.JTextField nameDisciplinaField;
     private javax.swing.JButton postAlunoButton;
     private javax.swing.JButton postButton;

@@ -226,7 +226,7 @@ public class VincularDiciplinaAluno extends javax.swing.JFrame {
             }
 
             if (disciplinasFaltantes.isEmpty()) {
-                novoAluno.setDisciplinas(novoDisciplina.getCodigo());
+                novoAluno.setDisciplinas(novoDisciplina);
                 this.setVisible(false);
             } else {
                 for (Disciplina elemento : disciplinasFaltantes) {

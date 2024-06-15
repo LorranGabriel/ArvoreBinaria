@@ -416,45 +416,41 @@ public class ConsultaAluno extends javax.swing.JFrame {
         ComparadorAlunoPorMatricula compPorMatricula = new ComparadorAlunoPorMatricula();
         ComparadorAlunoPorNome compPorNome = new ComparadorAlunoPorNome();
 
-        try {
-            if (is_name) {
-                aluno = new Aluno(-1, searchField.getText());
+        if (is_name) {
+            aluno = new Aluno(-1, searchField.getText());
 
-                try {
-                    Aluno novoItem = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compPorNome);
-                    if (novoItem == null) {
-                        errorDelLabel.setText("Aluno não encontrado pelo nome.");
-                    } else {
-                        arvoreBinariaAluno.remover(novoItem, compPorNome);
-                        errorDelLabel.setText("Aluno removido com sucesso.");
-                    }
-                } catch (Exception e) {
-                    errorDelLabel.setText("Erro ao remover o aluno pelo nome: " + e.getMessage());
-                    e.printStackTrace();
+            try {
+                Aluno novoItem = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compPorNome);
+                if (novoItem == null) {
+                    errorDelLabel.setText("Aluno não encontrado pelo nome.");
+                } else {
+                    arvoreBinariaAluno.remover(novoItem, compPorNome);
+                    errorDelLabel.setText("Aluno removido com sucesso.");
                 }
-            } else {
-                try {
-                    int matricula = Integer.parseInt(searchField.getText());
-                    aluno = new Aluno(matricula, "");
-
-                    Aluno novoItem = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compPorMatricula);
-                    if (novoItem == null) {
-                        errorDelLabel.setText("Aluno não encontrado pela matrícula.");
-                    } else {
-                        arvoreBinariaAluno.remover(novoItem, compPorMatricula);
-                        errorDelLabel.setText("Aluno removido com sucesso.");
-                    }
-                } catch (NumberFormatException e) {
-                    errorDelLabel.setText("O valor pesquisado deve ser um número inteiro válido.");
-                } catch (Exception e) {
-                    errorDelLabel.setText("Erro ao remover o aluno pela matrícula: " + e.getMessage());
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                errorDelLabel.setText("Erro ao remover o aluno pelo nome: " + e.getMessage());
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            errorDelLabel.setText("Você deve digitar algo na caixa de busca!");
-            e.printStackTrace();
+        } else {
+            try {
+                int matricula = Integer.parseInt(searchField.getText());
+                aluno = new Aluno(matricula, "");
+
+                Aluno novoItem = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compPorMatricula);
+                if (novoItem == null) {
+                    errorDelLabel.setText("Aluno não encontrado pela matrícula.");
+                } else {
+                    arvoreBinariaAluno.remover(novoItem, compPorMatricula);
+                    errorDelLabel.setText("Aluno removido com sucesso.");
+                }
+            } catch (NumberFormatException e) {
+                errorDelLabel.setText("O valor pesquisado deve ser um número inteiro válido.");
+            } catch (Exception e) {
+                errorDelLabel.setText("Erro ao remover o aluno pela matrícula: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
+
 
     }//GEN-LAST:event_delAlunoButtonMouseClicked
 
@@ -466,52 +462,53 @@ public class ConsultaAluno extends javax.swing.JFrame {
 
         Aluno novoItem = null;
         ArrayList<Integer> cursadas = null;
-        try{
-            if (is_name)
-            {
-                aluno = new Aluno( -1, searchField.getText());
-                try {
-                    novoItem = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compPorNome);
-                    errorLabel.setText("");
-                    nameField.setText(novoItem.getNome());
-                    matField.setText(Integer.toString(novoItem.getMatricula()));
-                    cursadas = novoItem.getDisciplinas();
-                }
-                catch (Exception e)
-                {
-                    errorLabel.setText("O valor pesquisado deve ser um nome valido");
-                }
-            }
-            else
-            {
-                aluno = new Aluno( Integer.parseInt(searchField.getText()), "");
-                try {
-                    novoItem = (Aluno) arvoreBinariaAluno.pesquisar( aluno, compPorMatricula);
-                    errorLabel.setText("");
-                    nameField.setText(novoItem.getNome());
-                    matField.setText(Integer.toString(novoItem.getMatricula()));
-                    cursadas = novoItem.getDisciplinas();
-                } catch (Exception e) {
-                    errorLabel.setText("O valor pesquisado deve ser um numero inteiro");
-                }
-            }
-            
-            String disciplinasCadastradas = "";
-            if(cursadas != null){
-                for (int i = 0; i < cursadas.size(); i++) {
-                    Integer elemento = cursadas.get(i);
-                    Disciplina disciplinaBusca = new Disciplina(elemento, "fantasy", -1);
-                    Disciplina novoCursada = (Disciplina) arvoreBinariaDisciplina.pesquisar(disciplinaBusca, compDisciplinaPorCodigo);
-                    disciplinasCadastradas += novoCursada.getNome()+"\n";
-                }
-                cursadasField.setText(disciplinasCadastradas);
-            }
-         
-            
-        }catch (Exception e)
+
+        if (is_name)
         {
-            errorLabel.setText("Voce deve digitar algo na caixa de busca!");
+            aluno = new Aluno( -1, searchField.getText());
+            try {
+                novoItem = (Aluno) arvoreBinariaAluno.pesquisar(aluno, compPorNome);
+                if(novoItem.getNome() == null){
+                    errorLabel.setText("Aluno nao encontrado");
+                }
+                nameField.setText(novoItem.getNome());
+                matField.setText(Integer.toString(novoItem.getMatricula()));
+                cursadas = novoItem.getDisciplinas();
+            }
+            catch (Exception e)
+            {
+                errorLabel.setText("O aluno nao foi encontrado");
+            }
         }
+        else
+        {
+            aluno = new Aluno( Integer.parseInt(searchField.getText()), "");
+            try {
+                novoItem = (Aluno) arvoreBinariaAluno.pesquisar( aluno );
+                if(novoItem.getNome() == null){
+                    errorLabel.setText("Aluno nao encontrado");
+                }
+                errorLabel.setText("Aluno encontrado");
+
+                nameField.setText(novoItem.getNome());
+                matField.setText(Integer.toString(novoItem.getMatricula()));
+                cursadas = novoItem.getDisciplinas();
+            } catch (Exception e) {
+                errorLabel.setText("O aluno nao foi encontrado");
+            }
+        }
+
+        String disciplinasCadastradas = "";
+        if(cursadas != null){
+            for (int i = 0; i < cursadas.size(); i++) {
+                Integer elemento = cursadas.get(i);
+                Disciplina disciplinaBusca = new Disciplina(elemento, "fantasy", -1);
+                Disciplina novoCursada = (Disciplina) arvoreBinariaDisciplina.pesquisar(disciplinaBusca, compDisciplinaPorCodigo);
+                disciplinasCadastradas += novoCursada.getNome()+"\n";
+            }
+            cursadasField.setText(disciplinasCadastradas);
+        }
+
     }//GEN-LAST:event_searchButtonMouseClicked
 
     private void nameSerachStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_nameSerachStateChanged

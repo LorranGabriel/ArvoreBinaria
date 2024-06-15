@@ -63,8 +63,8 @@ public class menuCadastro extends javax.swing.JFrame {
         Disciplina diciplina4 = new Disciplina(4, "Comunicacao empresarial", 30);
         Disciplina diciplina5 = new Disciplina(5, "Estrutura de Dados", 30);
         
-        diciplina1.setPrerequisitos(2);
-        diciplina1.setPrerequisitos(4);
+        diciplina1.setPrerequisitos(diciplina2);
+        diciplina1.setPrerequisitos(diciplina3);
 
         arvoreBinariaDisciplina.adicionar(diciplina1);
         arvoreBinariaDisciplina.adicionar(diciplina2);

@@ -430,18 +430,24 @@ public class ConsultaDisciplina extends javax.swing.JFrame {
             cargaHorariaField.setText(Integer.toString(novoItem.getCargaHoraria()) + " horas semestrais");
 
             String preReqs = "";
-            ArrayList<Integer> prerequisitos = novoItem.getPrerequisitos();
+            ArrayList<Disciplina> prerequisitos = novoItem.getPrerequisitos();
             for (int i = 0; i < prerequisitos.size(); i++) {
-                Integer numero = prerequisitos.get(i);
-                Disciplina disciplinaP = new Disciplina(numero, "fantasy", 1);
-                Disciplina novoItemP = (Disciplina) arvoreBinariaDisciplina.pesquisar(disciplinaP, compPorCodigo);
-
-                if (novoItemP == null) {
-                    errorLabel.setText("Pré-requisito não encontrado: " + numero);
-                    return;
+                Disciplina DisciplinaEncontrada = prerequisitos.get(i);
+                if(DisciplinaEncontrada.getNome() == null){
+                    errorLabel.setText("Pré-requisito não encontrado");
                 }
+                else{
+                    Disciplina novoItemP = (Disciplina) arvoreBinariaDisciplina.pesquisar(DisciplinaEncontrada, compPorCodigo);
 
-                preReqs += novoItemP.getNome() + "\n";
+                    if (novoItemP == null) {
+                        errorLabel.setText("Pré-requisito não encontrado: " + DisciplinaEncontrada.getNome());
+                        return;
+                    }
+                    preReqs += novoItemP.getNome() + "\n";
+
+                }
+              
+
             }
 
             prereqField.setText(preReqs);
